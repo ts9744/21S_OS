@@ -7,7 +7,7 @@ from user_gender_page import UserGenderPage
 from user_body_page import UserBodyPage
 from custom_page import CustomPage
 from workout_add_page import WorkoutAddPage
-#import avatar_loader  # 아바타 로드 모듈 불러오기
+import avatar_loader  # 아바타 로드 모듈 불러오기
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):

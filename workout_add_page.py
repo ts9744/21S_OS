@@ -9,9 +9,6 @@ class WorkoutAddPage(tk.Frame):
         self.controller.title("Workout Add Page")
         self.controller.geometry("400x600")
 
-        self.time_label = tk.Label(self, text="04:42", font=("Arial", 12))
-        self.time_label.pack(pady=10)
-
         self.title_label = tk.Label(self, text="새 훈련 1", font=("Arial", 20, "bold"))
         self.title_label.pack(pady=10)
 
