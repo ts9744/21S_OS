@@ -1,0 +1,49 @@
+import bpy
+
+def ensure_object_mode():
+    if bpy.context.object and bpy.context.object.mode != 'OBJECT':
+        bpy.ops.object.mode_set(mode='OBJECT')
+
+# 모든 객체 삭제
+def delete_all_objects():
+    ensure_object_mode()
+    bpy.ops.object.select_all(action='SELECT')
+    bpy.ops.object.delete(use_global=False)
+
+# 새로운 씬 생성 및 전환
+def create_new_scene():
+    new_scene = bpy.data.scenes.new("NewScene")
+    bpy.context.window.scene = new_scene
+
+create_new_scene()
+delete_all_objects()
+
+# Rigify 메타-리그 추가
+bpy.ops.object.armature_human_metarig_add()
+
+# 메타-리그 참조 및 선택
+armature = bpy.context.object
+bpy.context.view_layer.objects.active = armature
+
+# 편집 모드로 전환
+bpy.ops.object.mode_set(mode='EDIT')
+
+# 뼈대의 이름과 원하는 스케일 팩터 정의
+bones_to_scale = {
+    "spine": 1.2,
+    "thigh.L": 1.2,
+    "thigh.R": 1.2,
+    "upper_arm.L": 1.2,
+    "upper_arm.R": 1.2
+}
+
+# 뼈대 스케일 조정
+for bone_name, scale_factor in bones_to_scale.items():
+    if bone_name in armature.data.edit_bones:
+        bone = armature.data.edit_bones[bone_name]
+        bone.length *= scale_factor
+
+# 객체 모드로 전환
+bpy.ops.object.mode_set(mode='OBJECT')
+
+print("Bulky male avatar created successfully.")
