@@ -45,6 +45,9 @@ class StartPage(tk.Frame):
     def recommend_routine(self):
         print("추천 운동 루틴 버튼 클릭됨")
 
+    def update(self):
+        self.update_avatar()
+
 class App(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -67,6 +70,13 @@ class App(tk.Tk):
     def show_frame(self, page_name):
         frame = self.frames[page_name]
         frame.tkraise()
+        frame.update()
+
+    def get_page(self, page_name):
+        return self.frames[page_name]
+
+    def save_data(self):
+        save_user_data(self.user_data)
 
     def get_page(self, page_name):
         return self.frames[page_name]
