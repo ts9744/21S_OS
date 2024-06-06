@@ -5,7 +5,9 @@ from setting import SettingsPage
 from user_profile_page import UserProfilePage
 from user_gender_page import UserGenderPage
 from user_body_page import UserBodyPage
-import avatar_loader  # 아바타 로드 모듈 불러오기
+from custom_page import CustomPage
+from workout_add_page import WorkoutAddPage
+#import avatar_loader  # 아바타 로드 모듈 불러오기
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -30,7 +32,7 @@ class StartPage(tk.Frame):
         self.settings_button = ttk.Button(self.bottom_frame, text="설정", command=lambda: controller.show_frame("SettingsPage"))
         self.settings_button.grid(row=0, column=2, padx=10)
 
-        self.custom_button = ttk.Button(self.bottom_frame, text="커스텀", command=self.custom_routine)
+        self.custom_button = ttk.Button(self.bottom_frame, text="커스텀", command=lambda: controller.show_frame("CustomPage"))
         self.custom_button.grid(row=0, column=1, padx=10)
 
         self.update_avatar()
@@ -40,9 +42,6 @@ class StartPage(tk.Frame):
 
     def recommend_routine(self):
         print("추천 운동 루틴 버튼 클릭됨")
-
-    def custom_routine(self):
-        print("커스텀 버튼 클릭됨")
 
 class App(tk.Tk):
     def __init__(self):
@@ -55,7 +54,7 @@ class App(tk.Tk):
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
-        for F in (StartPage, SettingsPage, UserProfilePage, UserGenderPage, UserBodyPage):
+        for F in (StartPage, SettingsPage, UserProfilePage, UserGenderPage, UserBodyPage, CustomPage, WorkoutAddPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
