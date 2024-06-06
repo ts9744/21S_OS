@@ -1,9 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
+from PIL import Image, ImageTk
 from setting import SettingsPage
 from user_profile_page import UserProfilePage
 from user_gender_page import UserGenderPage
-from user_body_page  import UserBodyPage
+from user_body_page import UserBodyPage
+import avatar_loader  # 아바타 로드 모듈 불러오기
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -13,13 +15,14 @@ class StartPage(tk.Frame):
         self.controller.title("Start Page")
         self.controller.geometry("400x600")
 
-        # 화면 중상단: 아바타
-        self.avatar_label = tk.Label(self, text="Avatar", font=("Arial", 20))
-        self.avatar_label.pack(pady=50)
+        self.top_frame = tk.Frame(self)
+        self.top_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-        # 화면 하단: 추천 운동 루틴, 설정, 커스텀 버튼
         self.bottom_frame = tk.Frame(self)
         self.bottom_frame.pack(side=tk.BOTTOM, pady=20)
+
+        self.avatar_label = tk.Label(self.top_frame, font=("Arial", 20))
+        self.avatar_label.pack(expand=True)  # 중간에 위치하게 설정
 
         self.recommend_button = ttk.Button(self.bottom_frame, text="추천 운동 루틴", command=self.recommend_routine)
         self.recommend_button.grid(row=0, column=0, padx=10)
@@ -29,6 +32,11 @@ class StartPage(tk.Frame):
 
         self.custom_button = ttk.Button(self.bottom_frame, text="커스텀", command=self.custom_routine)
         self.custom_button.grid(row=0, column=1, padx=10)
+
+        self.update_avatar()
+
+    def update_avatar(self):
+        avatar_loader.load_avatar(self.controller, self.avatar_label)
 
     def recommend_routine(self):
         print("추천 운동 루틴 버튼 클릭됨")
@@ -41,6 +49,7 @@ class App(tk.Tk):
         tk.Tk.__init__(self)
         self._frame = None
         self.frames = {}
+        self.user_data = {}
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
