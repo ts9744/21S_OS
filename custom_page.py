@@ -10,19 +10,20 @@ class CustomPage(tk.Frame):
         self.controller.title("Custom Page")
         self.controller.geometry("400x600")
 
-        self.time_label = tk.Label(self, text="03:49", font=("Arial", 12))
-        self.time_label.pack(pady=10)
 
         self.title_label = tk.Label(self, text="커스텀", font=("Arial", 20, "bold"))
         self.title_label.pack(pady=10)
 
         self.load_image()
 
-        self.desc_label = tk.Label(self, text="첫 번째 커스텀 운동을 만드세요\n나만의 루틴을 설정하세요", font=("Arial", 14), justify=tk.CENTER)
+        self.desc_label = tk.Label(self, text="커스텀 운동을 만드세요\n나만의 루틴을 설정하세요", font=("Arial", 14), justify=tk.CENTER)
         self.desc_label.pack(pady=20)
 
         self.start_button = ttk.Button(self, text="+ 시작", command=lambda: controller.show_frame("WorkoutAddPage"))
         self.start_button.pack(pady=20)
+
+        self.back_button = ttk.Button(self, text="뒤로", command=lambda: controller.show_frame("StartPage"))
+        self.back_button.pack(pady=10)
 
     def load_image(self):
         try:
