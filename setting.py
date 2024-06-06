@@ -1,20 +1,34 @@
 import tkinter as tk
-import subprocess
+from tkinter import ttk
 
-def create_settings_window():
-    window = tk.Tk()
-    window.title("설정")
-    window.geometry("400x600")
+class SettingsPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
 
-    tk.Label(window, text="설정창 내용").pack(pady=20)
+        tk.Label(self, text="설정창 내용").pack(pady=20)
 
-    def back_to_start_page():
-        window.destroy()  # 현재 창을 닫습니다.
-        subprocess.run(["python", "start_page.py"])  # start_page.py를 다시 실행합니다.
+        # 사용자 프로필 버튼
+        def open_user_profile():
+            print("사용자 프로필 버튼 클릭됨")
 
-    tk.Button(window, text="뒤로", command=back_to_start_page).pack(pady=10)
+        profile_button = tk.Button(self, text="사용자 프로필", command=open_user_profile)
+        profile_button.pack(pady=10)
 
-    window.mainloop()
+        # 사용자 성별 버튼
+        def open_user_gender():
+            print("사용자 성별 버튼 클릭됨")
 
-if __name__ == "__main__":
-    create_settings_window()
+        gender_button = tk.Button(self, text="사용자 성별", command=open_user_gender)
+        gender_button.pack(pady=10)
+
+        # 사용자 체형 버튼
+        def open_user_body():
+            print("사용자 체형 버튼 클릭됨")
+
+        body_button = tk.Button(self, text="사용자 체형", command=open_user_body)
+        body_button.pack(pady=10)
+
+        # 뒤로 버튼
+        back_button = ttk.Button(self, text="뒤로", command=lambda: controller.show_frame("StartPage"))
+        back_button.pack(pady=10)

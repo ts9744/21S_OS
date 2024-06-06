@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from setting import SettingsPage
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -31,16 +32,6 @@ class StartPage(tk.Frame):
 
     def custom_routine(self):
         print("커스텀 버튼 클릭됨")
-
-class SettingsPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
-
-        tk.Label(self, text="설정창 내용").pack(pady=20)
-
-        back_button = ttk.Button(self, text="뒤로", command=lambda: controller.show_frame("StartPage"))
-        back_button.pack(pady=10)
 
 class App(tk.Tk):
     def __init__(self):
