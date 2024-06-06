@@ -7,7 +7,9 @@ from user_gender_page import UserGenderPage
 from user_body_page import UserBodyPage
 from custom_page import CustomPage
 from workout_add_page import WorkoutAddPage
+from exercise_list_page import ExerciseListPage
 import avatar_loader  # 아바타 로드 모듈 불러오기
+from data_manager import read_user_data, save_user_data
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -48,13 +50,13 @@ class App(tk.Tk):
         tk.Tk.__init__(self)
         self._frame = None
         self.frames = {}
-        self.user_data = {}
+        self.user_data = read_user_data()
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
-        for F in (StartPage, SettingsPage, UserProfilePage, UserGenderPage, UserBodyPage, CustomPage, WorkoutAddPage):
+        for F in (StartPage, SettingsPage, UserProfilePage, UserGenderPage, UserBodyPage, CustomPage, WorkoutAddPage, ExerciseListPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -66,6 +68,13 @@ class App(tk.Tk):
         frame = self.frames[page_name]
         frame.tkraise()
 
+    def get_page(self, page_name):
+        return self.frames[page_name]
+
+    def save_data(self):
+        save_user_data(self.user_data)
+
 if __name__ == "__main__":
     app = App()
+    app.protocol("WM_DELETE_WINDOW", app.save_data)  # 창을 닫을 때 데이터를 저장
     app.mainloop()
