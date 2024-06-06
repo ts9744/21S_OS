@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 from setting import SettingsPage
+from user_profile_page import UserProfilePage
+from user_gender_page import UserGenderPage
+from user_body_page  import UserBodyPage
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -43,7 +46,7 @@ class App(tk.Tk):
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
-        for F in (StartPage, SettingsPage):
+        for F in (StartPage, SettingsPage, UserProfilePage, UserGenderPage, UserBodyPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
