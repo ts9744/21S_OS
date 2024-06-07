@@ -1,0 +1,26 @@
+import bpy
+
+# Blender 파일 경로 설정 (여기에 Blender 파일 경로를 입력하세요)
+blend_file_path = "C:/Users/rlsxo/Abatar_test.blend"
+
+# Blender 파일 열기
+bpy.ops.wm.open_mainfile(filepath=blend_file_path)
+
+# 불러온 모델의 오브젝트 이름 출력
+for obj in bpy.data.objects:
+    print(f"Loaded object: {obj.name}")
+
+# 예제: 특정 오브젝트의 크기를 조정하는 함수
+def scale_object(object_name, scale_factor):
+    obj = bpy.data.objects.get(object_name)
+    if obj:
+        obj.scale.x *= scale_factor
+        obj.scale.y *= scale_factor
+        obj.scale.z *= scale_factor
+        print(f"{object_name} 크기 조정 완료")
+
+# 예제: 모델의 특정 부위 크기를 조정
+scale_object("Cube", 1.1)  # "Cube" 대신 조정할 오브젝트 이름 사용
+
+# 변경 사항을 저장 (경로를 사용자 디렉토리나 데스크탑으로 변경)
+bpy.ops.wm.save_as_mainfile(filepath="C:/Users/rlsxo/Desktop/modified_avatar.blend")
