@@ -6,7 +6,7 @@ def read_user_data():
     if os.path.exists("user_data.txt"):
         with open("user_data.txt", "r", encoding="utf-8") as file:
             for line in file:
-                key, value = line.strip().split(": ")
+                key, value = line.strip().split(": ", 1)
                 user_data[key] = value
     return user_data
 
@@ -21,11 +21,16 @@ def read_custom_list():
     if os.path.exists("custom_list.txt"):
         with open("custom_list.txt", "r", encoding="utf-8") as file:
             for line in file:
-                name, detail = line.strip().split(" - ")
-                exercises.append((name, detail))
+                parts = line.strip().split(" - ")
+                if len(parts) == 4:
+                    name, sets, reps, weight = parts
+                    exercises.append((name, sets, reps, weight))
+                else:
+                    name = parts[0]
+                    exercises.append((name, "", "", ""))
     return exercises
 
 def save_custom_list(exercises):
     with open("custom_list.txt", "w", encoding="utf-8") as file:
-        for name, detail in exercises:
-            file.write(f"{name} - {detail}\n")
+        for name, sets, reps, weight in exercises:
+            file.write(f"{name} - {sets} - {reps} - {weight}\n")

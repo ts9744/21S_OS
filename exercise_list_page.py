@@ -65,7 +65,7 @@ class ExerciseListPage(tk.Frame):
 
     def add_exercise(self):
         selected_exercise = self.exercise_listbox.get(tk.ACTIVE)
-        self.controller.get_page("WorkoutAddPage").add_exercise(selected_exercise, "1 세트 x 5회")
+        self.controller.get_page("WorkoutAddPage").add_exercise(selected_exercise)
         self.controller.show_frame("WorkoutAddPage")
 
     def go_back(self):
