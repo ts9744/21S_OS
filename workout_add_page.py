@@ -105,12 +105,7 @@ class WorkoutAddPage(tk.Frame):
             self.exercise_listbox.insert(tk.END, exercise[0])
 
     def start_workout(self):
-        for i, exercise in enumerate(self.exercises):
-            sets = exercise[1]
-            reps = exercise[2]
-            weight = exercise[3]
-            print(f"운동: {exercise[0]}, 세트: {sets}, 횟수: {reps}, 중량: {weight}")
-        print("운동 시작")
+        self.controller.show_frame("StartWorkoutPage")
 
     def go_back(self):
         self.controller.show_frame("CustomPage")
