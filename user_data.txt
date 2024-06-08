@@ -1,4 +1,4 @@
-Height: 181
-Weight: 99
-BodyType: 2
-Gender: 0
+Height: 171
+Weight: 52
+BodyType: 4
+Gender: 1

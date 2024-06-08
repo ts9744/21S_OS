@@ -1,4 +1,5 @@
 import tkinter as tk
+import os
 
 class UserGenderPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -24,8 +25,23 @@ class UserGenderPage(tk.Frame):
 
     def save_gender_data(self):
         gender = self.gender_var.get()
-
-        with open("user_data.txt", "a") as file:
-            file.write(f"Gender: {gender}\n")
+        
+        # 현재 데이터 읽기
+        user_data = {}
+        if os.path.exists("user_data.txt"):
+            with open("user_data.txt", "r") as file:
+                for line in file:
+                    if ": " in line:
+                        key, value = line.strip().split(": ", 1)
+                        user_data[key] = value
+        
+        # 성별 데이터 업데이트
+        user_data["Gender"] = gender
+        
+        # 데이터 저장
+        with open("user_data.txt", "w") as file:
+            for key, value in user_data.items():
+                file.write(f"{key}: {value}\n")
 
         print(f"Saved gender: {gender}")
+        self.controller.update_all_frames()

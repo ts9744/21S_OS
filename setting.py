@@ -12,13 +12,13 @@ class SettingsPage(tk.Frame):
         profile_button = tk.Button(self, text="사용자 프로필", command=lambda: controller.show_frame("UserProfilePage"))
         profile_button.pack(pady=10)
 
-        # 사용자 성별 버튼
-        gender_button = tk.Button(self, text="사용자 성별", command=lambda: controller.show_frame("UserGenderPage"))
-        gender_button.pack(pady=10)
-
         # 사용자 체형 버튼
         body_button = tk.Button(self, text="사용자 체형", command=lambda: controller.show_frame("UserBodyPage"))
         body_button.pack(pady=10)
+
+        # 사용자 성별 버튼
+        gender_button = tk.Button(self, text="사용자 성별", command=lambda: controller.show_frame("UserGenderPage"))
+        gender_button.pack(pady=10)
 
         # 뒤로 버튼
         back_button = ttk.Button(self, text="뒤로", command=lambda: controller.show_frame("StartPage"))
