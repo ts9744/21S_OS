@@ -13,13 +13,13 @@ def get_avatar_image(body_type):
     elif body_type == "4":
         image_path = os.path.join(avatars_dir, "thin.png")
     else:
-        image_path = os.path.join(avatars_dir, "default.png")
+        image_path = os.path.join(avatars_dir, "man_muscular.png")
     
     try:
         image = Image.open(image_path)
         return image
     except FileNotFoundError:
-        return Image.open(os.path.join(avatars_dir, "default.png"))
+        return Image.open(os.path.join(avatars_dir, "man_muscular.png"))
 
 def read_body_type_from_file():
     body_type = "1"  # 기본값

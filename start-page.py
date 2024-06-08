@@ -9,7 +9,7 @@ from custom_page import CustomPage
 from workout_add_page import WorkoutAddPage
 from exercise_list_page import ExerciseListPage
 from recommend_routine_page import RecommendRoutinePage
-from start_workout_page import StartWorkoutPage  # 여기 추가
+from start_workout_page import StartWorkoutPage
 import avatar_loader  # 아바타 로드 모듈 불러오기
 from data_manager import read_user_data, save_user_data
 
@@ -97,11 +97,9 @@ class App(tk.Tk):
     def save_data(self):
         save_user_data(self.user_data)
 
-    def get_page(self, page_name):
-        return self.frames[page_name]
-
-    def save_data(self):
-        save_user_data(self.user_data)
+    def update_all_frames(self):
+        for frame in self.frames.values():
+            frame.update()
 
 if __name__ == "__main__":
     app = App()

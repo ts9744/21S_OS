@@ -29,8 +29,9 @@ class UserProfilePage(tk.Frame):
         height = self.height_entry.get()
         weight = self.weight_entry.get()
 
-        with open("user_data.txt", "w") as file:
-            file.write(f"Height: {height}\n")
-            file.write(f"Weight: {weight}\n")
-
+        self.controller.user_data["Height"] = height
+        self.controller.user_data["Weight"] = weight
+        self.controller.save_data()
+        self.controller.update_all_frames()
+        
         print(f"Saved height: {height}, weight: {weight}")

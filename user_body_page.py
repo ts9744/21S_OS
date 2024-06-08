@@ -10,7 +10,7 @@ class UserBodyPage(tk.Frame):
         self.body_type_var = tk.StringVar()
         self.body_type_var.set(self.controller.user_data.get("BodyType", "1"))
 
-        body_types = [("일반적인 체형", "1"), ("근육질 체형", "2"), ("복부 비만 체형", "3")]
+        body_types = [("일반적인 체형", "1"), ("근육질 체형", "2"), ("비만 체형", "3"), ("마른 체형", "4")]
 
         for text, value in body_types:
             tk.Radiobutton(self, text=text, variable=self.body_type_var, value=value).pack(anchor=tk.W)
