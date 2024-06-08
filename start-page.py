@@ -10,7 +10,6 @@ except ImportError:
 
 import tkinter as tk
 from tkinter import ttk
-from PIL import Image, ImageTk
 from setting import SettingsPage
 from user_profile_page import UserProfilePage
 from user_gender_page import UserGenderPage
@@ -94,12 +93,15 @@ class App(tk.Tk):
             self.frames[page_name] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show_frame("StartPage")
+        last_page = self.user_data.get("LastPage", "StartPage")
+        self.show_frame(last_page)
 
     def show_frame(self, page_name):
         frame = self.frames[page_name]
         frame.tkraise()
         frame.update()
+        self.user_data["LastPage"] = page_name  # 마지막으로 열린 페이지 저장
+        self.save_data()
 
     def get_page(self, page_name):
         return self.frames[page_name]

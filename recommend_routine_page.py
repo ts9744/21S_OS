@@ -28,17 +28,15 @@ class RecommendRoutinePage(tk.Frame):
         self.exercise_frame = tk.Frame(self.scroll_canvas)
         self.scroll_canvas.create_window((0, 0), window=self.exercise_frame, anchor="nw")
 
-        self.next_button = ttk.Button(self, text="다음 날", command=self.next_day)
-        self.next_button.pack(side=tk.LEFT, padx=10, pady=10)
-
-        self.prev_button = ttk.Button(self, text="이전 날", command=self.prev_day)
-        self.prev_button.pack(side=tk.LEFT, padx=10, pady=10)
+        self.complete_button = ttk.Button(self, text="운동 완료", command=self.complete_day)
+        self.complete_button.pack(side=tk.LEFT, padx=10, pady=10)
 
         self.back_button = ttk.Button(self, text="뒤로", command=lambda: controller.show_frame("StartPage"))
         self.back_button.pack(side=tk.RIGHT, padx=10, pady=10)
 
         self.current_day_index = 0
         self.routine = {}
+        self.completed_days = 0
 
     def load_routine(self, body_type):
         file_path = ""
@@ -49,7 +47,8 @@ class RecommendRoutinePage(tk.Frame):
         # Add other body types as needed
 
         self.routine = read_routine(file_path)
-        self.current_day_index = 0
+        self.completed_days = int(self.controller.user_data.get("CompletedDays", 0))
+        self.current_day_index = self.completed_days
         self.show_day()
 
     def show_day(self):
@@ -65,14 +64,11 @@ class RecommendRoutinePage(tk.Frame):
                 exercise_label = tk.Label(self.exercise_frame, text=exercise, font=("Arial", 14))
                 exercise_label.pack(anchor="w", pady=5, padx=10)
 
-    def next_day(self):
+    def complete_day(self):
         if self.current_day_index < len(self.routine) - 1:
             self.current_day_index += 1
-            self.show_day()
-
-    def prev_day(self):
-        if self.current_day_index > 0:
-            self.current_day_index -= 1
+            self.controller.user_data["CompletedDays"] = self.current_day_index
+            self.controller.save_data()
             self.show_day()
 
     def update(self):

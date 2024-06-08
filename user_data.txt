@@ -1,4 +1,6 @@
 Height: 169
 Weight: 74
-BodyType: 3
+BodyType: 4
 Gender: 1
+CompletedDays: 5
+LastPage: StartPage
