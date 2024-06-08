@@ -45,7 +45,7 @@ def load_avatar(controller, label):
     avatar_image = get_avatar_image(gender, body_type)
 
     # 이미지 크기 조정 (예: 150x150 픽셀)
-    avatar_image = avatar_image.resize((150, 150), Image.LANCZOS)
+    avatar_image = avatar_image.resize((200, 300), Image.LANCZOS)
     
     avatar_photo = ImageTk.PhotoImage(avatar_image)
 
