@@ -42,10 +42,10 @@ class RecommendRoutinePage(tk.Frame):
 
     def load_routine(self, body_type):
         file_path = ""
-        if body_type == "1":  # 마름 체형
+        if body_type == "4":  # 마름 체형
             file_path = "for_thin.txt"
-        elif body_type == "2":  # 근육질 체형
-            file_path = "for_muscular.txt"
+        elif body_type == "3":  # 비만 체형
+            file_path = "for_fat.txt"
         # Add other body types as needed
 
         self.routine = read_routine(file_path)
