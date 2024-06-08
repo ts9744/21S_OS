@@ -1,3 +1,13 @@
+import subprocess
+import sys
+
+try:
+    from PIL import Image, ImageTk
+except ImportError:
+    print("Pillow가 설치되어 있지 않습니다. 설치를 시작합니다...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pillow"])
+    from PIL import Image, ImageTk
+
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
